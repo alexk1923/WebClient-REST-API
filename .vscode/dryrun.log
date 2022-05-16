@@ -1,0 +1,5 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory '/home/alexkullman/PCom/tema3'
+gcc -Wall -g client.c parson.c requests.c helpers.c buffer.c -o client
+make: Leaving directory '/home/alexkullman/PCom/tema3'
+ 
