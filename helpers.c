@@ -8,6 +8,8 @@
 #include <arpa/inet.h>
 #include "helpers.h"
 #include "buffer.h"
+#include "commands.h"
+#include "parson.h"
 
 #define HEADER_TERMINATOR "\r\n\r\n"
 #define HEADER_TERMINATOR_SIZE (sizeof(HEADER_TERMINATOR) - 1)
@@ -80,30 +82,24 @@ char *receive_from_server(int sockfd)
         int bytes = read(sockfd, response, BUFLEN);
 
         if (bytes < 0){
-            printf("aici_error");
             error("ERROR reading response from socket");
         }
 
         if (bytes == 0) {
-            printf("aici_receive_from_sv_0");
             break;
         }
 
         buffer_add(&buffer, response, (size_t) bytes);
-        printf("aici");
         header_end = buffer_find(&buffer, HEADER_TERMINATOR, HEADER_TERMINATOR_SIZE);
 
         if (header_end >= 0) {
-            printf("aici2");
             header_end += HEADER_TERMINATOR_SIZE;
             
             int content_length_start = buffer_find_insensitive(&buffer, CONTENT_LENGTH, CONTENT_LENGTH_SIZE);
             
             if (content_length_start < 0) {
-                printf("aici3");
                 continue;           
             }
-            printf("aici4");
             content_length_start += CONTENT_LENGTH_SIZE;
             content_length = strtol(buffer.data + content_length_start, NULL, 10);
             break;
@@ -113,13 +109,11 @@ char *receive_from_server(int sockfd)
     
     while (buffer.size < total) {
         int bytes = read(sockfd, response, BUFLEN);
-        printf("aici5");
         if (bytes < 0) {
             error("ERROR reading response from socket");
         }
 
         if (bytes == 0) {
-            printf("aici6");
             break;
         }
 
@@ -133,3 +127,4 @@ char *basic_extract_json_response(char *str)
 {
     return strstr(str, "{\"");
 }
+

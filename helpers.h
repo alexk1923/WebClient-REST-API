@@ -1,8 +1,30 @@
 #ifndef _HELPERS_
 #define _HELPERS_
 
+#include "commands.h"
+
 #define BUFLEN 4096
 #define LINELEN 1000
+#define MAX_IP 17
+#define MAX_COMMAND 50
+#define MAX_USERNAME 50
+#define MAX_PASSWORD 50
+#define MAX_BODY_FIELDS 10
+#define MAX_FIELD 300
+#define MAX_COOKIES 20
+#define MAX_COOKIE_SIZE 200
+#define MAX_DIGITS_ID 7
+#define MAX_TITLE 50
+#define MAX_AUTHOR 30
+#define MAX_GENRE 15
+#define MAX_PUBLISHER 30
+#define MAX_MSG 200
+#define MAX_TOKEN 500
+#define MAX_BOOK 100
+#define MAX_BOOK_DETAILED 300
+#define URL_SIZE 50
+#define CONT_TYPE_SIZE 30
+#define MAX_PAGE_CNT_DIGITS 5
 
 // shows the current error
 void error(const char *msg);
